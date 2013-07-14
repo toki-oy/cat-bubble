@@ -7,8 +7,14 @@ initialize: function(x,y){
     this.image = game.assets['images/icon1.png'];
     this.x = x; this.y = y; this.frame = 0;
     game.rootScene.addChild(this);
+    this.addEventListener(Event.ENTER_FRAME, function(){
+        if(game.input.up){
+            this.y -= 10;
+        }
+    });
 }
 });
+    
 
 
     
