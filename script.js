@@ -14,47 +14,42 @@ initialize: function(x,y){
     
 
 window.onload = function() {
-game = new Game(320, 320);
-game.fps = 16;
-game.preload('images/icon1.png','vector.png','pad.png');
-game.tick = 0;
-
-game.onload = function() {
- ball = new ball(152, 240); //ボールを出現させる
-    /*game.rootScene.backgroundColor = 'black';*/
-    
-    var pad = new Pad();
-    pad.x   = 0;
-    pad.y   = 220;
-    game.rootScene.addChild(pad);
-    
-
-    vector = new Sprite(120, 26);
-    vector.image = game.assets['vector.png'];
-    vector.x = 100; 
-    vector.y = 220;
-    vector.scaleX = 1/300;
-    vector.scaleY = 1/300;
-    /*vector.rotate(Math.atan2(4,2));*/ 
-    game.rootScene.addChild(vector);
-
-    //矢印の定期処理
-    vector.tick = 0;
-    vector.addEventListener(Event.ENTER_FRAME, function(){
-        //左
-        if (game.input.left){
-            /*vector.x -= 3;*/
-            vector.scaleX = -1;
-            vector.rotation -= 10;
-        }
-        //右
-        else if (game.input.right){
-            /*vector.x += 3;*/
-            vector.scaleY = 1;
-            vector.rotation += 10;
-        }
-    }); 
-};                    
-game.start();
-
+    game = new Game(320, 320);
+    game.fps = 16;
+    game.preload('images/icon1.png','vector.png','pad.png');
+    game.tick = 0;
+    game.onload = function() {
+        //背景の生成
+        var bg = new Sprite(320, 320);
+        bg.backgroundColor = 'green';
+        game.root;
+        ball = new ball(152, 240); //ボールを出現させる
+        var pad = new Pad();
+        pad.x   = 0;
+        pad.y   = 220;
+        game.rootScene.addChild(pad);
+        vector = new Sprite(120, 26);
+        vector.image = game.assets['vector.png'];
+        vector.x = 100; 
+        vector.y = 225;
+        
+        game.rootScene.addChild(vector);
+        //矢印の定期処理
+        vector.tick = 0;
+        vector.addEventListener(Event.ENTER_FRAME, function(){
+            if(vector.rotation > -180 || vector.rotation < 0){
+                if(game.input.left){
+                    if(vector.rotation - 10 != -180){
+                        vector.rotation -= 10;
+                    }
+                }
+                if(game.input.right){
+                    if(vector.rotation + 10 != 0){
+                        vector.rotation += 10;
+                    }
+                }
+            };
+        });
+    };
+    game.start();
 };
