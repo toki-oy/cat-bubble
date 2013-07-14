@@ -16,7 +16,7 @@ initialize: function(x,y){
 window.onload = function() {
 game = new Game(320, 320);
 game.fps = 16;
-game.preload('images/icon1.png','icon0.png','pad.png');
+game.preload('images/icon1.png','vector.png','pad.png');
 game.tick = 0;
 
 game.onload = function() {
@@ -29,12 +29,13 @@ game.onload = function() {
     game.rootScene.addChild(pad);
     
 
-    vector = new Sprite(16, 16);
-    vector.image = game.assets['icon0.png'];
-    vector.x = 152; 
-    vector.y = 200;
-    vector.frame = 43; 
-    vector.rotate(Math.atan2(4,2)); 
+    vector = new Sprite(120, 26);
+    vector.image = game.assets['vector.png'];
+    vector.x = 100; 
+    vector.y = 220;
+    vector.scaleX = 1/300;
+    vector.scaleY = 1/300;
+    /*vector.rotate(Math.atan2(4,2));*/ 
     game.rootScene.addChild(vector);
 
     //矢印の定期処理
